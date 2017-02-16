@@ -32,10 +32,13 @@ class TimelineViewController: UIViewController {
                 
                 TwitterCommunicator().getTimeline() { [weak self] data, error in
                     
-                    if let _ = error { return }
+                    if let error = error {
+                        print(error)
+                        return
+                    }
                     
-                    let tweetParser = TweetParser()
-                    let tweets = tweetParser.parse(data: data!)
+                    let timelineParser = TimelineParser()
+                    let tweets = timelineParser.parse(data: data!)
                     self?.tweets = tweets
                 }
             }

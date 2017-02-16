@@ -8,19 +8,20 @@
 
 import Foundation
 
-struct TweetParser {
+struct TimelineParser {
     
     func parse(data: Data) -> [Tweet] {
         let serializedData = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
+        
         let json = serializedData as! [Any]
             
-        let tweets = json.map {
+        let timeline = json.map {
             Tweet(json: $0)!
         }.filter {
             $0 != nil
         }
         
-        return tweets
+        return timeline
     }
     
 }

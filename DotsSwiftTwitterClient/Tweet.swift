@@ -15,7 +15,6 @@ struct Tweet {
     let user: User
     
     init?(json: Any) {
-        
         guard let dictionary = json as? [String: Any] else { return nil }
         
         guard let id = dictionary["id_str"] as? String else { return nil }

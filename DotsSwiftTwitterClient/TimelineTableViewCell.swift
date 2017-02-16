@@ -30,7 +30,7 @@ class TimelineTableViewCell: UITableViewCell {
         downloadTask.resume()
         
         nameLabel.text = tweet.user.name
-        screenNameLabel.text = tweet.user.screenName
+        screenNameLabel.text = "@" + tweet.user.screenName
         textContentLabel.text = tweet.text
     }
     
