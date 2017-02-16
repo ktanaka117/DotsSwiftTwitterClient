@@ -26,9 +26,9 @@ class TimelineViewController: UIViewController {
         LoginCommunicator().login() { isSuccess in
             switch isSuccess {
             case false:
-                
                 print("ログイン失敗")
             case true:
+                print("ログイン成功")
                 
                 TwitterCommunicator().getTimeline() { [weak self] data, error in
                     
@@ -36,7 +36,7 @@ class TimelineViewController: UIViewController {
                     
                     let tweetParser = TweetParser()
                     let tweets = tweetParser.parse(data: data!)
-                    self?.tweets = tweets!
+                    self?.tweets = tweets
                 }
             }
         }
@@ -63,7 +63,7 @@ extension TimelineViewController: UITableViewDelegate {
 extension TimelineViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return tweets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

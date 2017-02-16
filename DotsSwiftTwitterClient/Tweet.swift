@@ -12,7 +12,7 @@ struct Tweet {
     
     let id: String
     let text: String
-    let user: User?
+    let user: User
     
     init?(json: Any) {
         
@@ -20,11 +20,12 @@ struct Tweet {
         
         guard let id = dictionary["id_str"] as? String else { return nil }
         guard let text = dictionary["text"] as? String else { return nil }
-        guard let user = dictionary["user"] else { return nil }
+        guard let userJSON = dictionary["user"] else { return nil }
+        guard let user = User(json: userJSON) else { return nil }
         
         self.id = id
         self.text = text
-        self.user = User(json: user)
+        self.user = user
     }
     
 }
