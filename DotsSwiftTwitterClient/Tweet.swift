@@ -14,6 +14,12 @@ struct Tweet {
     let text: String
     let user: User
     
+    init(id: String, text: String, user: User) {
+        self.id = id
+        self.text = text
+        self.user = user
+    }
+    
     init?(json: Any) {
         guard let dictionary = json as? [String: Any] else { return nil }
         

@@ -20,6 +20,13 @@ struct User {
     // プロフィール画像URL
     let profileImageURL: String
     
+    init(id: String, screenName: String, name: String, profileImageURL: String) {
+        self.id = id
+        self.screenName = screenName
+        self.name = name
+        self.profileImageURL = profileImageURL
+    }
+    
     init?(json: Any) {
         guard let dictionary = json as? [String: Any] else { return nil }
         
