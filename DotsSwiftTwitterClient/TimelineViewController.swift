@@ -12,13 +12,7 @@ class TimelineViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var tweets: [Tweet] = [] {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                self?.tableView.reloadData()
-            }
-        }
-    }
+    var tweets: [Tweet] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +34,10 @@ class TimelineViewController: UIViewController {
                     let timelineParser = TimelineParser()
                     let tweets = timelineParser.parse(data: data!)
                     self?.tweets = tweets
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        self?.tableView.reloadData()
+                    }
                 }
             }
         }
