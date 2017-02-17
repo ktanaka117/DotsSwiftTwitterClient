@@ -36,7 +36,7 @@ struct LoginCommunicator {
             }
             
             let accounts = store.accounts(with: type)
-            // TODO: アカウント選択させよう
+            
             if let account = accounts?.first as? ACAccount {
                 Account.twitterAccount = account
                 handler(true)
