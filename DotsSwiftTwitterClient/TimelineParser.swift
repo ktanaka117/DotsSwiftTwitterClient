@@ -15,10 +15,8 @@ struct TimelineParser {
         
         let json = serializedData as! [Any]
             
-        let timeline = json.map {
-            Tweet(json: $0)!
-        }.filter {
-            $0 != nil
+        let timeline: [Tweet] = json.flatMap {
+            Tweet(json: $0)
         }
         
         return timeline
