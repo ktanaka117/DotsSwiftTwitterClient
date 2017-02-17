@@ -9,6 +9,8 @@
 import Foundation
 
 struct User {
+    
+    // ユーザーのid
     let id: String
     
     // (@)ktanaka117
