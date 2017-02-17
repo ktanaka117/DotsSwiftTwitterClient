@@ -10,8 +10,13 @@ import Foundation
 
 struct Tweet {
     
+    // ツイートのid
     let id: String
+    
+    // ツイートの本文
     let text: String
+    
+    // このツイートを発言したユーザー
     let user: User
     
     init(id: String, text: String, user: User) {
