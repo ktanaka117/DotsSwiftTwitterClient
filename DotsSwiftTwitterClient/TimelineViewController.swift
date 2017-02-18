@@ -21,17 +21,17 @@ class TimelineViewController: UIViewController {
         tableView.dataSource = self
         
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(TimelineViewController.refresh(for :)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(TimelineViewController.refresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
         fetch()
     }
-   
-    func refresh(for refreshControl: UIRefreshControl) {
-        fetch()
-        refreshControl.endRefreshing()
-    }
     
+    func refresh() {
+        fetch()
+        tableView.refreshControl?.endRefreshing()
+    }
+   
     func fetch() {
         LoginCommunicator().login() { isSuccess in
             switch isSuccess {
