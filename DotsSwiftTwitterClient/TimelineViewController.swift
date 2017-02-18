@@ -24,7 +24,15 @@ class TimelineViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(TimelineViewController.refresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
-        fetch()
+        LoginCommunicator().login() { [weak self] isSuccess in
+            switch isSuccess {
+            case false:
+                print("ログイン失敗")
+            case true:
+                print("ログイン成功")
+                self?.fetch()
+            }
+        }
     }
     
     func refresh() {
@@ -33,28 +41,19 @@ class TimelineViewController: UIViewController {
     }
    
     func fetch() {
-        LoginCommunicator().login() { isSuccess in
-            switch isSuccess {
-            case false:
-                print("ログイン失敗")
-            case true:
-                print("ログイン成功")
-                
-                TwitterCommunicator().getTimeline() { [weak self] data, error in
-                    
-                    if let error = error {
-                        print(error)
-                        return
-                    }
-                    
-                    let timelineParser = TimelineParser()
-                    let tweets = timelineParser.parse(data: data!)
-                    self?.tweets = tweets
-                    
-                    DispatchQueue.main.async { [weak self] in
-                        self?.tableView.reloadData()
-                    }
-                }
+        TwitterCommunicator().getTimeline() { [weak self] data, error in
+            
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            let timelineParser = TimelineParser()
+            let tweets = timelineParser.parse(data: data!)
+            self?.tweets = tweets
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
             }
         }
     }
