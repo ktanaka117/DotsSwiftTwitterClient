@@ -20,6 +20,10 @@ class TimelineViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        let refreshControl = UIRefreshControl(frame: CGRect.zero)
+        refreshControl.addTarget(self, action: #selector(TimelineViewController.refresh(for :)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+        
         LoginCommunicator().login() { isSuccess in
             switch isSuccess {
             case false:
@@ -45,7 +49,11 @@ class TimelineViewController: UIViewController {
             }
         }
     }
-
+   
+    func refresh(for refreshControl: UIRefreshControl) {
+        print("refreshed")
+        refreshControl.endRefreshing()
+    }
 }
 
 extension TimelineViewController: UITableViewDelegate {
