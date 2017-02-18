@@ -17,6 +17,9 @@ class TimelineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         LoginCommunicator().login() { isSuccess in
             switch isSuccess {
             case false:
