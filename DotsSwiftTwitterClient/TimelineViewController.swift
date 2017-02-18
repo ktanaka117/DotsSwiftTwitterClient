@@ -24,6 +24,15 @@ class TimelineViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(TimelineViewController.refresh(for :)), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
+        fetch()
+    }
+   
+    func refresh(for refreshControl: UIRefreshControl) {
+        fetch()
+        refreshControl.endRefreshing()
+    }
+    
+    func fetch() {
         LoginCommunicator().login() { isSuccess in
             switch isSuccess {
             case false:
@@ -48,11 +57,6 @@ class TimelineViewController: UIViewController {
                 }
             }
         }
-    }
-   
-    func refresh(for refreshControl: UIRefreshControl) {
-        print("refreshed")
-        refreshControl.endRefreshing()
     }
 }
 
