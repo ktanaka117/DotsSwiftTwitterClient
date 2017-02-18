@@ -20,7 +20,7 @@ class TimelineViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        let refreshControl = UIRefreshControl(frame: CGRect.zero)
+        let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(TimelineViewController.refresh(for :)), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
